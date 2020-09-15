@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">TakaslaOriginal</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_fragment">Login Fragment</string>
+    <string name="register_fragment">Register Fragment</string>
+    <string name="name_surname">ISIM SOYISIM</string>
+    <string name="email_address">E-MAIL ADRESI</string>
+    <string name="password">ŞIFRE</string>
+    <string name="password_confirm">ŞIFRE TEKRAR</string>
+    <string name="register">Üye Ol</string>
+    <string name="my_password">ŞIFREMI</string>
+    <string name="i_forgot">UNUTTUM!</string>
+    <string name="users_collection">users</string>
+</resources>

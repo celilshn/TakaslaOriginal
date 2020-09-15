@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "726754388761",
+    "firebase_url": "https://takasla-3b155.firebaseio.com",
+    "project_id": "takasla-3b155",
+    "storage_bucket": "takasla-3b155.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:726754388761:android:fdfe548a7dee56e5ca7388",
+        "android_client_info": {
+          "package_name": "com.cengcelil.takaslaoriginal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "726754388761-mnjl5rrjrlekpur3emd4uq5d401c3hro.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cengcelil.takaslaoriginal",
+            "certificate_hash": "9a194bcdfda757bfb6fb5d54e6d96149b05dc389"
+          }
+        },
+        {
+          "client_id": "726754388761-et9jen3lsjiohddbtqt8dprh49fqumbd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9PXx6W2BOKgQfkrp9Ppybrg4MBHh3AEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "726754388761-et9jen3lsjiohddbtqt8dprh49fqumbd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
