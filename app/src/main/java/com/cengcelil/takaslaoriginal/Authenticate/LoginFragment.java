@@ -1,66 +1,152 @@
 package com.cengcelil.takaslaoriginal.Authenticate;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.cengcelil.takaslaoriginal.Manager.ManagerActivity;
+import com.cengcelil.takaslaoriginal.Models.UserClient;
+import com.cengcelil.takaslaoriginal.Models.UserInformation;
 import com.cengcelil.takaslaoriginal.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Date;
+
 public class LoginFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String TAG = "LoginFragment";
+    private EditText etEmail, etPassword;
+    private String sEmail, sPassword;
+    private Button btRegister, btLogin, btFacebookLogin;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseFirestore firebaseFirestore;
+    private CollectionReference userCollection;
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        Log.d(TAG, "onCreate: ");
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        userCollection = firebaseFirestore.collection(getString(R.string.users_collection));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        Log.d(TAG, "onCreateView: ");
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        setupViews(view);
+        return view;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated: ");
+        btRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getFragmentManager() != null) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, new RegisterFragment(), getString(R.string.register_fragment))
+                            .commit();
+                }
+
+            }
+        });
+        btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getInputFields();
+                firebaseAuth.signInWithEmailAndPassword(sEmail, sPassword)
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(final AuthResult authResult) {
+                                Log.d(TAG, "onSuccess: ");
+                                userCollection.document(authResult.getUser().getUid())
+                                        .update("lastLogin", new Date(System.currentTimeMillis()))
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Log.d(TAG, "onComplete: ");
+                                                setUserInformation(authResult.getUser().getUid());
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.d(TAG, "onFailure: " + e.getMessage());
+                                            }
+                                        });
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d(TAG, "onFailure: " + e.getMessage());
+                            }
+                        });
+            }
+        });
+    }
+
+    private void setUserInformation(String uid) {
+        Log.d(TAG, "setUserInformation: ");
+        userCollection.document(uid).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        Log.d(TAG, "onComplete: ");
+                        ((UserClient) getActivity().getApplicationContext()).setUserInformation(task.getResult().toObject(UserInformation.class));
+                        Log.d(TAG, "onComplete: "+((UserClient) getActivity().getApplicationContext()).getUserInformation().getName());
+                        getActivity().finish();
+                        startActivity(new Intent(getActivity(), ManagerActivity.class));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "onFailure: "+e.getMessage());
+                    }
+                });
+    }
+
+    private void setupViews(View view) {
+        Log.d(TAG, "setupViews: ");
+        etEmail = view.findViewById(R.id.etEmail);
+        etPassword = view.findViewById(R.id.etPassword);
+        btRegister = view.findViewById(R.id.btRegister);
+        btLogin = view.findViewById(R.id.btLogin);
+        btFacebookLogin = view.findViewById(R.id.btFacebookLogin);
+    }
+
+    private void getInputFields() {
+        Log.d(TAG, "getInputFields: ");
+        sEmail = etEmail.getText().toString().trim();
+        sPassword = etPassword.getText().toString().trim();
+    }
+
+
 }

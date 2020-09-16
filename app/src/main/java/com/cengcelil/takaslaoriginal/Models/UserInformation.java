@@ -1,8 +1,25 @@
 package com.cengcelil.takaslaoriginal.Models;
 
-public class UserInformation {
-    private String name,email;
+import com.google.firebase.firestore.ServerTimestamp;
 
+import java.util.Date;
+
+public class UserInformation {
+    public UserInformation() {
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    private String name, email;
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    @ServerTimestamp
+    Date lastLogin;
     public String getName() {
         return name;
     }

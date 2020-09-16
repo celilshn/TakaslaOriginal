@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/authenticate_background_image"
-    android:fitsSystemWindows="true"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Authenticate.RegisterFragment">
     <androidx.constraintlayout.widget.Guideline
@@ -75,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name_surname"
+            android:text="Mehmet Ali"
             android:inputType="textPersonName"
             android:imeOptions="actionDone"
             android:paddingBottom="20dp"
@@ -97,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email_address"
+            android:text="mali@mali.mali"
             android:imeOptions="actionDone"
             android:inputType="textEmailAddress"
             android:paddingBottom="20dp"
@@ -118,6 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
+            android:text="123mali123"
             android:imeOptions="actionDone"
             android:paddingBottom="20dp"
             android:inputType="textPassword"
@@ -140,6 +141,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password_confirm"
+            android:text="123mali123"
             android:imeOptions="actionDone"
             android:paddingBottom="20dp"
             android:inputType="textPassword"

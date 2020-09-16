@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/application_topbar_layout"
+    android:layout_height="80dp"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="307"
+    android:paddingTop="25dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="0dp"
+    android:background="@drawable/application_main_topbar_background"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditText
+        android:id="@+id/etTopbarSearch"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="272"
+        android:ems="10"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:background="@drawable/application_main_topbar_edittext_background"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:drawablePadding="11dp"
+        android:hint="@string/what_are_you_looking_for"
+        android:textColorHint="@color/colorGray"
+        android:maxLength="100"
+        android:inputType="textEmailAddress" />
+    <ImageView
+        android:id="@+id/btTopbarSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_weight="37"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:src="@drawable/icon_tune"/>
+</LinearLayout>

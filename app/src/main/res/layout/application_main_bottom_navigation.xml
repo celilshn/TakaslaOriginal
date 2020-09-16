@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/fab_background"
+        app:fab_colorNormal="@android:color/transparent"
+        app:fab_colorPressed="#E75043"
+        app:fab_colorRipple="#99FFFFFF"
+        app:fab_hideAnimation="@anim/fab_scale_down"
+        app:fab_label=""
+        app:fab_shadowColor="#66000000"
+        app:fab_showAnimation="@anim/fab_scale_up"
+        app:fab_showShadow="false"
+        app:fab_size="normal" />
+
+    <com.cengcelil.takaslaoriginal.Views.CustomBottomNavigationView
+        android:id="@+id/customBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        app:itemRippleColor="@android:color/black"
+        android:layout_below="@id/fab"
+        android:layout_marginTop="-26dp"
+        app:itemIconSize="30dp"
+        app:itemIconTint="@color/application_main_bottom_navigation_item_color"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/navigation" />
+
+    <ImageView
+        android:id="@+id/bariphone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/customBottomBar"
+        android:background="@color/white"
+        android:paddingBottom="3dp"
+        android:src="@drawable/iphone_bottom_icon" />
+
+</RelativeLayout>

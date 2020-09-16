@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#EE5164</color>
-    <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#EE5164</color>
     <color name="colorEdittextHint">#80EE5164</color>
     <color name="colorGray">#DAD9E2</color>
     <color name="colorfacebooktone">#367FC0</color>
+    <color name="white">#FFFFFF</color>
+    <color name="application_main_bottom_navigation_icon_tint_color">#8890A6</color>
+    <color name="application_main_bottom_navigation_icon_tint_color_checked">#FE707A</color>
 </resources>
