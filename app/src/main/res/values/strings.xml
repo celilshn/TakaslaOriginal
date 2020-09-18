@@ -20,4 +20,5 @@
     <string name="search_fragment">Search Fragment</string>
     <string name="messages_fragment">Messages Fragment</string>
     <string name="profile_fragment">Profile Fragment</string>
+    <string name="capture_fragment">Capture Fragment</string>
 </resources>

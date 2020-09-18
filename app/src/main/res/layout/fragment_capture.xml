@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddProduct.Fragments.CaptureFragment">
+    <FrameLayout
+        android:id="@+id/flCamera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/captured_recyclerview"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/captured_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/menu_background"
+        android:layout_above="@+id/aa"/>
+    <LinearLayout
+        android:id="@+id/aa"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/menu_background"
+        android:weightSum="3">
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </RelativeLayout>
+        <ImageView
+            android:id="@+id/btcapture"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/capture_png"
+            >
+
+        </ImageView>
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

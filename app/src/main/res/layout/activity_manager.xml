@@ -2,19 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".Manager.ManagerActivity">
+    tools:context="com.cengcelil.takaslaoriginal.Manager.ManagerActivity">
 
     <include
         android:id="@+id/include"
         app:layout_constraintTop_toTopOf="parent"
         layout="@layout/application_main_topbar" />
-
-
     <FrameLayout
         android:id="@+id/manager_container"
         android:layout_width="match_parent"
