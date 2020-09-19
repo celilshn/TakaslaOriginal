@@ -8,6 +8,7 @@
         android:id="@+id/single_captured_imageview"
         android:layout_width="match_parent"
         android:src="@drawable/book_magasine_png"
+        android:scaleType="fitXY"
         android:layout_height="match_parent"/>
     <ImageView
         android:id="@+id/single_captured_x_button"

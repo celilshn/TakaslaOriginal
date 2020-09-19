@@ -9,4 +9,5 @@
     <color name="application_main_bottom_navigation_icon_tint_color">#8890A6</color>
     <color name="application_main_bottom_navigation_icon_tint_color_checked">#FE707A</color>
     <color name="menu_background">#F2D8D8</color>
+    <color name="capture_topbar_text_color">#FE7579</color>
 </resources>
