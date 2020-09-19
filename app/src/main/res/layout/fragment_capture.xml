@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,37 +29,39 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="6"
-            android:scaleType="center"
-            android:gravity="center"
             android:fontFamily="@font/poppins_light"
+            android:gravity="center"
+            android:scaleType="center"
             android:text="Fotoğraf"
             android:textColor="@color/capture_topbar_text_color"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/capture_top_bar_turn_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="center"
-                android:src="@drawable/capture_top_bar_turn_button" />
+        <ImageView
+            android:id="@+id/capture_top_bar_turn_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="center"
+            android:src="@drawable/capture_top_bar_turn_button" />
 
-            <ImageView
-                android:id="@+id/capture_top_bar_flash_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="center"
+        <ImageView
+            android:id="@+id/capture_top_bar_flash_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scaleType="center"
 
-                android:src="@drawable/capture_top_bar_flash_off_button" />
+            android:src="@drawable/capture_top_bar_flash_on_button" />
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/flCamera"
+    <com.camerakit.CameraKitView
+        android:id="@+id/camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/captured_recyclerview"
+        app:camera_imageJpegQuality="100"
+        android:adjustViewBounds="true"
         android:layout_below="@id/capture_top_bar" />
 
     <androidx.recyclerview.widget.RecyclerView
