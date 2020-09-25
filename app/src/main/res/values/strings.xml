@@ -21,4 +21,23 @@
     <string name="messages_fragment">Messages Fragment</string>
     <string name="profile_fragment">Profile Fragment</string>
     <string name="capture_fragment">Capture Fragment</string>
+    <string name="pick_from_gallery">Galeriden Seç</string>
+    <string name="activity_gallery_image_transition" translatable="false">%s[image]</string>
+    <string name="activity_gallery_checkbox_transition" translatable="false">%s[checkbox]</string>
+    <string name="activity_gallery_permission_request_explanation">To fetch your Media, allow storage permission in App Permission Settings.</string>
+    <string name="activity_gallery_permission_request_settings">Ayarlar</string>
+    <string name="activity_gallery_action_select_all">Hepsini Seç</string>
+    <string name="activity_gallery_action_clear">Temizle</string>
+    <string name="activity_gallery_no_images">Fotoğraf Yok.</string>
+    <string name="activity_gallery_max_selection_reached">Seçebileceğin fotoğraf sınırına ulaştın.</string>
+    <string name="activity_gallery_will_exceed_max_selection">Seçebileceğin fotoğraf sınırını aştın.</string>
+
+    <string name="activity_gallery_bucket_all_media">Tüm Medya</string>
+    <string name="contunue">Devam Et</string>
+    <string name="sort_fragment">Sort Fragment</string>
+    <plurals name="activity_gallery_count_selection">
+        <item quantity="one">%d seçildi</item>
+        <item quantity="other">%d seçildi</item>
+    </plurals>
+
 </resources>

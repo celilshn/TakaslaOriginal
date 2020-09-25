@@ -17,4 +17,5 @@ public class AddProductActivity extends AppCompatActivity {
                 .replace(R.id.add_product_container,new CaptureFragment(),getString(R.string.capture_fragment))
                 .commit();
     }
+
 }

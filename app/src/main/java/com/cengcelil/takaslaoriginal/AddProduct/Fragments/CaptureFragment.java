@@ -1,5 +1,7 @@
 package com.cengcelil.takaslaoriginal.AddProduct.Fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -7,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,28 +19,35 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.andremion.louvre.Louvre;
+import com.andremion.louvre.home.GalleryActivity;
 import com.camerakit.CameraKit;
 import com.camerakit.CameraKitView;
-import com.camerakit.type.CameraFlash;
 import com.cengcelil.takaslaoriginal.Adapters.CapturedAdapter;
 import com.cengcelil.takaslaoriginal.Models.CapturedItem;
 import com.cengcelil.takaslaoriginal.R;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
+
 public class CaptureFragment extends Fragment {
     private static final String TAG = "CaptureFragment";
     private RecyclerView capturedRecycler;
     private CapturedAdapter capturedAdapter;
     private ArrayList<CapturedItem> capturedItems;
-    private ImageView turnButton;
+    private ImageView turnButton, exitButton;
     private CameraKitView cameraKitView;
     private ImageView flashButton;
     private static boolean isFlashOn = false;
-
+    private LinearLayout btPickGallery;
+    private RelativeLayout nextButton;
+    public static final int LOUVRE_REQUEST_CODE = 55;
+    private static final int maxImagesCount = 10;
 
     @Override
     public void onStart() {
@@ -68,18 +79,39 @@ public class CaptureFragment extends Fragment {
         Log.d(TAG, "onViewCreated: ");
         cameraKitView = view.findViewById(R.id.camera);//
         flashButton = view.findViewById(R.id.capture_top_bar_flash_button);
-// 1
+        btPickGallery = view.findViewById(R.id.btPickGallery);
         turnButton = view.findViewById(R.id.capture_top_bar_turn_button);// 1
-        capturedRecycler = view.findViewById(R.id.captured_recyclerview);// 1
+        exitButton = view.findViewById(R.id.capture_top_bar_x_button);// 1
+        nextButton = view.findViewById(R.id.rlNextButton);// 1
 
+        capturedRecycler = view.findViewById(R.id.captured_recyclerview);// 1
         capturedRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));//  1
         capturedAdapter = new CapturedAdapter(capturedItems, getActivity());//  1
         capturedRecycler.setAdapter(capturedAdapter);//  1
+
         view.findViewById(R.id.btcapture).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: ");
-                captureImage();
+                if (capturedAdapter.getItemCount() == maxImagesCount) {
+                    Snackbar.make(getActivity().findViewById(android.R.id.content), getString(R.string.activity_gallery_max_selection_reached), Snackbar.LENGTH_SHORT).show();
+                } else
+                    captureImage();
+            }
+        });
+        btPickGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (capturedAdapter.getItemCount() == maxImagesCount) {
+                    Snackbar.make(getActivity().findViewById(android.R.id.content), getString(R.string.activity_gallery_max_selection_reached), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    Louvre louvre = Louvre.init(CaptureFragment.this)
+                            .setRequestCode(LOUVRE_REQUEST_CODE);
+                    louvre.setMaxSelection(maxImagesCount - capturedAdapter.getItemCount());
+
+                    louvre.setMediaTypeFilter(Louvre.IMAGE_TYPE_JPEG, Louvre.IMAGE_TYPE_PNG);
+                    louvre.open();
+                }
             }
         });
         turnButton.setOnClickListener(new View.OnClickListener() {
@@ -100,14 +132,32 @@ public class CaptureFragment extends Fragment {
                         isFlashOn = false;
                         flashButton.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.capture_top_bar_flash_on_button));
                         cameraKitView.setFlash(CameraKit.FLASH_OFF);
+
                     } else {
                         Log.d(TAG, "onClick: flash off to on");
                         isFlashOn = true;
-                        flashButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.capture_top_bar_flash_off_button));;
+                        flashButton.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.capture_top_bar_flash_off_button));
                         cameraKitView.setFlash(CameraKit.FLASH_TORCH);
 
 
                     }
+            }
+        });
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("capturedItems", capturedItems);
+                SortFragment sortFragment = new SortFragment();
+                sortFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.add_product_container, sortFragment, getString(R.string.sort_fragment))
+                        .addToBackStack(null).commit();
             }
         });
     }
@@ -159,7 +209,10 @@ public class CaptureFragment extends Fragment {
                 else {
                     Log.d(TAG, "onPictureTaken: writing");
                     try {
-                        capturedItems.add(0, new CapturedItem(file));
+                        CapturedItem item = new CapturedItem(file);
+                        item.setDragEnable(true);
+                        item.setDropEnable(true);
+                        capturedItems.add(0, item);
                         capturedAdapter.notifyDataSetChanged();
                         FileOutputStream fos = new FileOutputStream(file);
                         fos.write(bytes);
@@ -173,4 +226,19 @@ public class CaptureFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == LOUVRE_REQUEST_CODE && resultCode == RESULT_OK) {
+            for (Uri uri : GalleryActivity.getSelection(data)) {
+                CapturedItem item = new CapturedItem(new File(uri.getPath()));
+                item.setDragEnable(true);
+                item.setDropEnable(true);
+                capturedItems.add(0, item);
+            }
+            capturedAdapter.notifyDataSetChanged();
+            Log.d(TAG, "onActivityResult: " + GalleryActivity.getSelection(data));
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

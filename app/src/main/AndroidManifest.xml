@@ -8,8 +8,9 @@
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <uses-feature android:name="android.hardware.camera.front" android:required="false" />
     <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".Models.UserClient"
         android:allowBackup="true"
@@ -29,7 +30,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name="com.andremion.louvre.home.GalleryActivity"
+            android:theme="@style/AppTheme.Louvre.Light" />
+        <activity
+            android:name="com.andremion.louvre.preview.PreviewActivity"
+            android:theme="@style/AppTheme.Louvre.Preview" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

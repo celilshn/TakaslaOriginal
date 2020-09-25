@@ -8,4 +8,12 @@
         <item name="android:textColorHint">@color/colorEdittextHint</item>
         <item name="colorControlNormal">#80000000</item>
     </style>
+    <style name="AppTheme.Louvre.Light" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorGray</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme.Louvre.Preview" parent="Louvre.Theme.Preview">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>

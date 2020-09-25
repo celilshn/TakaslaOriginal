@@ -80,12 +80,29 @@
         android:orientation="horizontal"
         android:weightSum="3">
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/btPickGallery"
             android:layout_width="0dip"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
             android:layout_weight="1">
-
-        </RelativeLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/pick_gallery_png"/>
+            <TextView
+                android:layout_width="64dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:lines="2"
+                android:textStyle="bold"
+                android:textColor="@color/capture_topbar_text_color"
+                android:textSize="15sp"
+                android:text="@string/pick_from_gallery"/>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/btcapture"
@@ -97,9 +114,30 @@
         </ImageView>
 
         <RelativeLayout
+            android:id="@+id/rlNextButton"
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="1">
+            <ImageView
+                android:id="@+id/ivNextArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/next_arrow_png"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/contunue"
+                android:textColor="@color/capture_topbar_text_color"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/ivNextArrow"
+                android:layout_marginEnd="10dp"
+                android:textSize="15sp"/>
+
 
         </RelativeLayout>
 
