@@ -1,6 +1,7 @@
 package com.cengcelil.takaslaoriginal.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CapturedAdapter extends RecyclerView.Adapter<CapturedAdapter.MyViewHolder> {
+    private static final String TAG = "CapturedAdapter";
     private ArrayList<CapturedItem> capturedItems;
     private Context context;
     public CapturedAdapter(ArrayList<CapturedItem> capturedItems,Context context) {
@@ -35,11 +37,20 @@ public class CapturedAdapter extends RecyclerView.Adapter<CapturedAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Glide
                 .with(context)
                 .load(capturedItems.get(position).getFile())
                 .into(holder.capturedView);
+        holder.x_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                capturedItems.remove(capturedItems.get(position));
+                notifyDataSetChanged();
+                Log.d(TAG, "onClick: "+capturedItems.size());
+
+            }
+        });
     }
 
     @Override

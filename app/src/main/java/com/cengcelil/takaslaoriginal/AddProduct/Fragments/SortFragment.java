@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,10 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.cengcelil.takaslaoriginal.Adapters.SortAdapter;
 import com.cengcelil.takaslaoriginal.Models.CapturedItem;
 import com.cengcelil.takaslaoriginal.R;
-import com.cengcelil.takaslaoriginal.Views.DividerGridItemDecoration;
+import com.cengcelil.takaslaoriginal.Views.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 
@@ -31,6 +34,8 @@ public class SortFragment extends Fragment {
     private static final String TAG = "SortFragment";
     private DragRecyclerView dragRecyclerView;
     private SortAdapter sortAdapter;
+    private ImageView ivPreviewImage;
+    private RelativeLayout nextButton,backButton;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -97,9 +102,12 @@ public class SortFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d(TAG, "onViewCreated: ");
         dragRecyclerView = view.findViewById(R.id.drv);
-        dragRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        dragRecyclerView.setHasFixedSize(false);
-        dragRecyclerView.addItemDecoration(new DividerGridItemDecoration());
+        ivPreviewImage = view.findViewById(R.id.ivPreviewImage);
+        nextButton = view.findViewById(R.id.rlNextButton);
+        backButton = view.findViewById(R.id.rlBackButton);
+        dragRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3,GridLayoutManager.VERTICAL,false));
+        dragRecyclerView.setHasFixedSize(true);
+        dragRecyclerView.addItemDecoration(new GridSpacingItemDecoration(3,15,true));
         HoldTouchHelper.OnItemTouchEvent onItem = new HoldTouchHelper.OnItemTouchEvent() {
             @Override
             public void onLongPress(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int i) {
@@ -107,16 +115,29 @@ public class SortFragment extends Fragment {
                 if (((SortAdapter) recyclerView.getAdapter()).onItemDrag(i)) {
                     Log.d(TAG, "onLongPress: ");
                     ((DragRecyclerView) recyclerView).startDrag(i);
+                    Glide.with(getContext()).
+                            load(sortAdapter.getCapturedItems().get(i).getFile()).
+                            into(ivPreviewImage);
+
+
                 }
             }
 
             @Override
             public void onItemClick(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, int i) {
-
+                Glide.with(getContext()).
+                        load(sortAdapter.getCapturedItems().get(i).getFile()).
+                        into(ivPreviewImage);
             }
         };
-
         dragRecyclerView.dragEnable(true).showDragAnimation(true).setDragAdapter(sortAdapter).bindEvent(onItem);
         dragRecyclerView.setHasFixedSize(false);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               getActivity().onBackPressed();
+            }
+        });
     }
+
 }

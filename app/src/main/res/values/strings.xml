@@ -35,6 +35,7 @@
     <string name="activity_gallery_bucket_all_media">Tüm Medya</string>
     <string name="contunue">Devam Et</string>
     <string name="sort_fragment">Sort Fragment</string>
+    <string name="back">Geri</string>
     <plurals name="activity_gallery_count_selection">
         <item quantity="one">%d seçildi</item>
         <item quantity="other">%d seçildi</item>

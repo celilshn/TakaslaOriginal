@@ -1,12 +1,14 @@
 package com.cengcelil.takaslaoriginal.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,8 +22,13 @@ import java.util.Collections;
 import cn.cyan.dragrecyclerview.OnItemChangeListener;
 
 public class SortAdapter extends RecyclerView.Adapter<SortAdapter.MyHolder> implements OnItemChangeListener {
+    public ArrayList<CapturedItem> getCapturedItems() {
+        return capturedItems;
+    }
+
     private ArrayList<CapturedItem> capturedItems;
     private Context context;
+    private static final String TAG = "SortAdapter";
     public SortAdapter(ArrayList<CapturedItem> capturedItems,Context context) {
         this.capturedItems = capturedItems;
         this.context = context;
@@ -30,7 +37,12 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.MyHolder> impl
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.single_sort_item, parent, false));
+        Log.d(TAG, "onCreateViewHolder: ");
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_sort_item, parent, false);
+        GridLayoutManager.LayoutParams lp = (GridLayoutManager.LayoutParams) view.getLayoutParams();
+        lp.height = parent.getMeasuredHeight() / 3-30;
+        view.setLayoutParams(lp);
+        return new MyHolder(view);
     }
 
     @Override
@@ -46,6 +58,7 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.MyHolder> impl
 
     @Override
     public boolean onItemDrag(int position) {
+        Log.d(TAG, "onItemDrag: ");
         return capturedItems.get(position).isDragEnable();
 
     }
@@ -68,6 +81,8 @@ public class SortAdapter extends RecyclerView.Adapter<SortAdapter.MyHolder> impl
 
     @Override
     public boolean onItemDrop(int position) {
+
+        Log.d(TAG, "onItemDrop: ");
         return capturedItems.get(position).isDropEnable();
     }
 

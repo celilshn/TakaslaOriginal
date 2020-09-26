@@ -47,7 +47,7 @@ public class CaptureFragment extends Fragment {
     private LinearLayout btPickGallery;
     private RelativeLayout nextButton;
     public static final int LOUVRE_REQUEST_CODE = 55;
-    private static final int maxImagesCount = 10;
+    private static final int maxImagesCount = 9;
 
     @Override
     public void onStart() {
