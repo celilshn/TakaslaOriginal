@@ -25,48 +25,13 @@ import java.util.ArrayList;
 import cn.cyan.dragrecyclerview.DragRecyclerView;
 import cn.cyan.dragrecyclerview.HoldTouchHelper;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SortFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class SortFragment extends Fragment {
     private static final String TAG = "SortFragment";
     private DragRecyclerView dragRecyclerView;
     private SortAdapter sortAdapter;
     private ImageView ivPreviewImage;
     private RelativeLayout nextButton,backButton;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private ArrayList<CapturedItem> capturedItems;
-
-    public SortFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SortFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SortFragment newInstance(String param1, String param2) {
-        SortFragment fragment = new SortFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -136,6 +101,17 @@ public class SortFragment extends Fragment {
             @Override
             public void onClick(View view) {
                getActivity().onBackPressed();
+            }
+        });
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("capturedItems", capturedItems);
+                CategoryFragment categoryFragment = new CategoryFragment();
+                categoryFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.add_product_container, categoryFragment, getString(R.string.category_fragment))
+                        .addToBackStack(null).commit();
             }
         });
     }

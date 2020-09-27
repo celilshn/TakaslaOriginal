@@ -36,6 +36,8 @@
     <string name="contunue">Devam Et</string>
     <string name="sort_fragment">Sort Fragment</string>
     <string name="back">Geri</string>
+    <string name="select_category">Kategori Seç</string>
+    <string name="category_fragment">Category Fragment</string>
     <plurals name="activity_gallery_count_selection">
         <item quantity="one">%d seçildi</item>
         <item quantity="other">%d seçildi</item>
