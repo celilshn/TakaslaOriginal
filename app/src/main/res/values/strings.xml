@@ -38,6 +38,11 @@
     <string name="back">Geri</string>
     <string name="select_category">Kategori Seç</string>
     <string name="category_fragment">Category Fragment</string>
+    <string name="details_of_product">İlan Detayları</string>
+    <string name="status_of_product">Ürünün Durumu</string>
+    <string name="newWord">Yeni</string>
+    <string name="lilUsed">Az Kullanılmış</string>
+    <string name="used">Kullanılmış</string>
     <plurals name="activity_gallery_count_selection">
         <item quantity="one">%d seçildi</item>
         <item quantity="other">%d seçildi</item>

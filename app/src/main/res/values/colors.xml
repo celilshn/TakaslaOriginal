@@ -4,10 +4,14 @@
     <color name="colorAccent">#EE5164</color>
     <color name="colorEdittextHint">#80EE5164</color>
     <color name="colorGray">#DAD9E2</color>
+    <color name="colorSoftGray">#4DDAD9E2</color>
+    <color name="colorDarkGray">#707070</color>
     <color name="colorfacebooktone">#367FC0</color>
     <color name="white">#FFFFFF</color>
     <color name="application_main_bottom_navigation_icon_tint_color">#8890A6</color>
     <color name="application_main_bottom_navigation_icon_tint_color_checked">#FE707A</color>
     <color name="menu_background">#FFFFFF</color>
     <color name="capture_topbar_text_color">#000000</color>
+    <color name="details_radiobutton_unselected_text_color">#BF8890A6</color>
+    <color name="details_radiobutton_selected_text_color">#707070</color>
 </resources>
