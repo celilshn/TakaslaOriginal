@@ -73,7 +73,13 @@ public class CategoryFragment extends Fragment {
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getActivity(), categoryItems.get(position).getName(), Toast.LENGTH_SHORT).show();
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelableArrayList("capturedItems", capturedItems);
+                        bundle.putParcelable("categoryItem", categoryItems.get(position));
+                        DetailsFragment detailsFragment = new DetailsFragment();
+                        detailsFragment.setArguments(bundle);
+                        getFragmentManager().beginTransaction().replace(R.id.add_product_container, detailsFragment, getString(R.string.details_fragment))
+                                .addToBackStack(null).commit();
                     }
                 });
             }

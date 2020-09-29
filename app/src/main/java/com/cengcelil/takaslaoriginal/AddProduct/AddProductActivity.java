@@ -13,6 +13,7 @@ public class AddProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.add_product_container,new CaptureFragment(),getString(R.string.capture_fragment))
                 .commit();

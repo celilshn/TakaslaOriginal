@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentTop="true"
-        android:background="@color/menu_background"
+        android:background="@color/colorDarkYellow"
         android:orientation="horizontal"
         android:weightSum="9">
 
@@ -52,35 +52,35 @@
             android:layout_height="wrap_content">
 
 
-
-
-
             <RelativeLayout
                 android:id="@+id/details_product_status"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-               android:layout_alignParentTop="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="25dp">
+                android:layout_marginEnd="25dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
                     android:text="@string/status_of_product"
                     android:textColor="@color/colorPrimary"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentBottom="true"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
+
                 <ImageView
+                    android:id="@+id/status_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="@drawable/unlem_png"
-                    android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/unlem_png" />
 
             </RelativeLayout>
 
@@ -90,49 +90,281 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/details_product_status"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="15dp"
-                android:layout_marginTop="10dp">
-                
+                android:visibility="gone">
+
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/details_radio_button_unselected_bg"
+                    android:background="@drawable/custom_btn_radio"
                     android:button="@android:color/transparent"
+                    android:drawableStart="@drawable/new_smile_png"
                     android:paddingStart="20dp"
                     android:paddingEnd="50dp"
                     android:text="@string/newWord"
                     android:textAlignment="center"
-                    android:textColor="@color/details_radiobutton_unselected_text_color"
-                    android:drawableStart="@drawable/new_smile_png"/>
+                    android:textColor="@color/details_radiobutton_unselected_text_color" />
 
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/details_radio_button_unselected_bg"
-                    android:button="@android:color/transparent"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="50dp"
                     android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_btn_radio"
+                    android:button="@android:color/transparent"
+                    android:drawableStart="@drawable/lil_smile_png"
+                    android:paddingStart="20dp"
+
+                    android:paddingEnd="50dp"
                     android:text="@string/lilUsed"
                     android:textAlignment="center"
-                    android:textColor="@color/details_radiobutton_unselected_text_color"
-                    android:drawableStart="@drawable/lil_smile_png"/>
+                    android:textColor="@color/details_radiobutton_unselected_text_color" />
 
                 <RadioButton
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/details_radio_button_unselected_bg"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_btn_radio"
                     android:button="@android:color/transparent"
+                    android:drawableStart="@drawable/lil_smile_png"
                     android:paddingStart="20dp"
                     android:paddingEnd="50dp"
-                    android:layout_marginTop="8dp"
                     android:text="@string/used"
                     android:textAlignment="center"
-                    android:textColor="@color/details_radiobutton_unselected_text_color"
-                    android:drawableStart="@drawable/lil_smile_png"/>
+                    android:textColor="@color/details_radiobutton_unselected_text_color" />
             </RadioGroup>
 
+            <!--Title -->
+            <RelativeLayout
+                android:id="@+id/details_product_title"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/details_status_rg"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="25dp"
+                android:visibility="gone">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/title_of_product"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/title_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/unlem_png" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/etTitleProduct"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/details_product_title"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/details_radio_button_unselected_bg"
+                android:visibility="gone" />
+            <!--Title -->
+
+            <!--Description -->
+            <RelativeLayout
+                android:id="@+id/details_product_description"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/etTitleProduct"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="25dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/title_of_product"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/description_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/unlem_png" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/etDescriptionProduct"
+                android:layout_width="match_parent"
+                android:layout_height="185dp"
+                android:layout_below="@id/details_product_description"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/details_radio_button_unselected_bg"
+                android:visibility="gone" />
+            <!--Description -->
+
+            <!--Price -->
+            <RelativeLayout
+                android:id="@+id/details_product_price"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/etDescriptionProduct"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="25dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvPriceProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/price_of_product"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/price_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/unlem_png" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/etPriceProduct"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/details_product_price"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:background="@drawable/details_radio_button_unselected_bg"
+                android:visibility="gone" />
+            <!--Price -->
+
+            <!--Exchange -->
+            <TextView
+                android:id="@+id/tvExchangeProduct"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/etPriceProduct"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="25dp"
+                android:text="@string/exhange_of_product"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:visibility="visible" />
+            <RelativeLayout
+                android:id="@+id/rlExchangeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@id/tvExchangeProduct"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="15dp">
+                <TextView
+                    android:id="@+id/tvExchangerProductInner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/pricable"
+                    android:gravity="center_vertical"
+                    android:paddingStart="25dp"
+                    android:textSize="15sp"
+                    android:background="@drawable/details_radio_button_unselected_bg"/>
+                <RadioGroup
+                    android:id="@+id/rgExchange"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/exhange_rg_background"
+                    android:layout_centerVertical="true">
+
+                    <RadioButton
+                        android:id="@+id/rb_close_for_exchange"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:button="@drawable/exchange_rb_background"
+                        android:layout_marginStart="6dp"
+                        android:checked="true"
+                        android:layout_weight="1"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_open_for_exchange"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="2dp"
+                        android:button="@drawable/exchange_rb_background"
+                        android:layout_weight="1"/>
+                </RadioGroup>
+
+
+            </RelativeLayout>
+            <!--Exchange -->
+
+
+            <!--Place -->
+            <RelativeLayout
+                android:id="@+id/details_product_place"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/rlExchangeLayout"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="25dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/place_of_product"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/location_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/unlem_png" />
+
+            </RelativeLayout>
+            <!--Place -->
         </RelativeLayout>
     </ScrollView>
 

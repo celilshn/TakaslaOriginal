@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">TakaslaOriginal</string>
+    <string name="api_key">AIzaSyB9PXx6W2BOKgQfkrp9Ppybrg4MBHh3AEE</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="login_fragment">Login Fragment</string>
     <string name="register_fragment">Register Fragment</string>
@@ -43,6 +45,14 @@
     <string name="newWord">Yeni</string>
     <string name="lilUsed">Az Kullanılmış</string>
     <string name="used">Kullanılmış</string>
+    <string name="details_fragment">Details Fragment</string>
+    <string name="title_of_product">Ürünün Başlığı</string>
+    <string name="price_of_product">Fiyat</string>
+    <string name="exhange_of_product">Takas</string>
+    <string name="open_for_exchange">Sadece Takasa Açık</string>
+    <string name="pricable">Fiyatlanabilir</string>
+    <string name="place_of_product">Konum</string>
+    <string name="confirm_location">Konumu Onayla</string>
     <plurals name="activity_gallery_count_selection">
         <item quantity="one">%d seçildi</item>
         <item quantity="other">%d seçildi</item>
