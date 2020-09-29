@@ -1,16 +1,29 @@
 package com.cengcelil.takaslaoriginal.Models;
 
+import android.Manifest;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.cengcelil.takaslaoriginal.R;
@@ -25,11 +38,15 @@ import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.button.MaterialButton;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -38,77 +55,95 @@ public class BottomSheetMapDialog extends BottomSheetDialogFragment implements O
     MapView mapView;
     FragmentManager fragmentManager;
     private GoogleMap googleMap;
+    private MaterialButton btConfirmLocation;
+    private TextView tvLocation;
 
-    public BottomSheetMapDialog(FragmentManager fragmentManager) {
+    public BottomSheetMapDialog(FragmentManager fragmentManager, TextView textView) {
         this.fragmentManager = fragmentManager;
+        this.tvLocation = textView;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
+
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        final Dialog d = super.onCreateDialog(savedInstanceState);
+        // view hierarchy is inflated after dialog is shown
+        d.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                //this disables outside touch
+
+                d.getWindow().findViewById(R.id.touch_outside).setOnClickListener(null);
+                //this prevents dragging behavior
+                View content = d.getWindow().findViewById(R.id.design_bottom_sheet);
+                BottomSheetBehavior.from(content).setPeekHeight(d.findViewById(R.id.rlalllayout).getMeasuredHeight());
+                BottomSheetBehavior.from(content).setHideable(false);
+                BottomSheetBehavior.from(content).setState(BottomSheetBehavior.STATE_EXPANDED);
+//                ((CoordinatorLayout.LayoutParams) content.getLayoutParams()).setBehavior(null);
+
+            }
+        });
+        return d;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable
             ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.details_bottom_sheet_map_dialog, container, false);
-        v.setBackground(getActivity().getDrawable(R.drawable.details_bottom_sheet_top_bar_background));
+
         // Gets the MapView from the XML layout and creates it
         mapView = (MapView) v.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        if (!Places.isInitialized()) {
-            Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key), Locale.US);
-        }
-        // Initialize the AutocompleteSupportFragment.
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                fragmentManager.findFragmentById(R.id.autocomplete_fragment);
-
-        // Specify the types of place data to return.
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.LAT_LNG,Place.Field.ADDRESS_COMPONENTS));
-
-        // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(@NotNull Place place) {
-                // TODO: Get info about the selected place.
-                AddPlace(place, 1);
-                Log.i(TAG, "Place: " + place.getLatLng().latitude + ", " + place.getLatLng().longitude);
-            }
-
-
-            @Override
-            public void onError(@NotNull Status status) {
-                // TODO: Handle the error.
-                Log.i(TAG, "An error occurred: " + status);
-            }
-        });
-
-
         return v;
-    }
-
-    public void AddPlace(Place place, int pno) {
-        try {
-            if (googleMap == null) {
-                Toast.makeText(getActivity(), "Please check your API key for Google Places SDK and your internet conneciton", Toast.LENGTH_LONG).show();
-            } else {
-                googleMap.clear();
-                LatLng latLng = new LatLng(place.getLatLng().latitude,place.getLatLng().longitude);
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,
-                        15));
-
-                googleMap.addMarker(new MarkerOptions().position(latLng)
-                        .title("Name:" + place.getName() + ". Address:" + place.getAddress()));
-
-
-            }
-        } catch (Exception ex) {
-            Toast.makeText(getActivity(), "Error:" + ex.getMessage().toString(), Toast.LENGTH_LONG).show();
-        }
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        btConfirmLocation = view.findViewById(R.id.btConfirmLocation);
+        btConfirmLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LatLng midLatLng = googleMap.getCameraPosition().target;
+                Log.d(TAG, "onCameraIdle: " + midLatLng.latitude + " " + midLatLng.longitude);
+                tvLocation.setText(getCompleteAddressString(midLatLng.latitude, midLatLng.longitude));
+                dismiss();
+            }
+        });
 
+    }
+
+    private String getCompleteAddressString(double LATITUDE, double LONGITUDE) {
+        String strAdd = "";
+        Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        try {
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+            if (addresses != null) {
+                Address returnedAddress = addresses.get(0);
+                StringBuilder strReturnedAddress = new StringBuilder("");
+
+                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
+                }
+                strAdd = strReturnedAddress.toString();
+                Log.d(TAG, "My Current loction address " + strReturnedAddress.toString());
+            } else {
+                Log.d(TAG, "My Current loction address" + " No Address returned!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d(TAG, "My Current loction address" + " Canont get Address!");
+        }
+        return strAdd;
     }
 
     @Override
@@ -117,8 +152,20 @@ public class BottomSheetMapDialog extends BottomSheetDialogFragment implements O
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         this.googleMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        this.googleMap.setMyLocationEnabled(true);
+
     }
 
     @Override

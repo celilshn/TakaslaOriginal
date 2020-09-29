@@ -1,73 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
-        android:id="@+id/details_bottom_sheet_top_bar"
+    android:id="@+id/bottomSheet">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/details_bottom_sheet_top_bar_background">
+
+    <RelativeLayout
+        android:id="@+id/rlalllayout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        android:weightSum="9">
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/details_bottom_sheet_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:weightSum="9">
+
+            <ImageView
+                android:id="@+id/details_top_bar_back_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:src="@drawable/capture_top_bar_x_button"
+                app:tint="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/details_top_bar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:fontFamily="@font/poppins_light"
+                android:gravity="center"
+                android:scaleType="center"
+                android:text="@string/place_of_product"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.google.android.libraries.maps.MapView
+            android:id="@+id/mapview"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_below="@id/details_bottom_sheet_top_bar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
 
         <ImageView
-            android:id="@+id/details_top_bar_back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="center"
-            android:src="@drawable/capture_top_bar_x_button"
-            app:tint="@color/colorPrimary" />
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_above="@id/llbutton"
+            android:layout_below="@id/details_bottom_sheet_top_bar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_outline_location_on_24"
+            app:tint="@color/colorDarkYellow" />
 
-        <TextView
-            android:id="@+id/details_top_bar_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:fontFamily="@font/poppins_light"
+        <LinearLayout
+            android:id="@+id/llbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mapview"
             android:gravity="center"
-            android:scaleType="center"
-            android:text="@string/place_of_product"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-    <fragment android:id="@+id/autocomplete_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/details_bottom_sheet_top_bar"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-        />
-<com.google.android.libraries.maps.MapView
-    android:id="@+id/mapview"
-    android:layout_below="@id/details_bottom_sheet_top_bar"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentEnd="true"
-    android:layout_width="match_parent"
-    android:layout_height="400dp"/>
+            android:paddingTop="30dp"
+            android:paddingBottom="20dp">
 
-    <LinearLayout
-        android:layout_below="@id/mapview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp"
-        android:gravity="center"
-        android:paddingBottom="20dp">
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:background="@drawable/add_product_button_bg"
-        android:text="@string/confirm_location"
-        android:singleLine="true"
-        android:textAllCaps="false"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14sp"
-        app:backgroundTint="@null"
-/>
-    </LinearLayout>
-</RelativeLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btConfirmLocation"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:background="@drawable/add_product_button_bg"
+                android:singleLine="true"
+                android:text="@string/confirm_location"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
+</LinearLayout>

@@ -364,6 +364,13 @@
                     android:src="@drawable/unlem_png" />
 
             </RelativeLayout>
+            <TextView
+                android:id="@+id/tvPlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/details_product_place"
+                android:textSize="20sp"
+                android:text="aga"/>
             <!--Place -->
         </RelativeLayout>
     </ScrollView>

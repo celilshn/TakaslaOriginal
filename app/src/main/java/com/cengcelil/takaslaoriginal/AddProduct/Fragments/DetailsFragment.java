@@ -21,6 +21,7 @@ import com.cengcelil.takaslaoriginal.Models.BottomSheetMapDialog;
 import com.cengcelil.takaslaoriginal.Models.CapturedItem;
 import com.cengcelil.takaslaoriginal.Models.CategoryItem;
 import com.cengcelil.takaslaoriginal.R;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,7 @@ public class DetailsFragment extends Fragment {
     private static final String TAG = "DetailsFragment";
     private ArrayList<CapturedItem> capturedItems;
     private CategoryItem categoryItem;
-    private TextView tvPrice,tvExchangerProductInner;
+    private TextView tvPrice,tvExchangerProductInner,tvPlace;
     private EditText etPriceProduct;
     private RadioGroup rgExchange;
     private RelativeLayout details_product_place;
@@ -59,6 +60,7 @@ public class DetailsFragment extends Fragment {
         tvExchangerProductInner = view.findViewById(R.id.tvExchangerProductInner);
         etPriceProduct = view.findViewById(R.id.etPriceProduct);
         details_product_place = view.findViewById(R.id.details_product_place);
+        tvPlace = view.findViewById(R.id.tvPlace);
         rgExchange.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -84,8 +86,7 @@ public class DetailsFragment extends Fragment {
         details_product_place.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BottomSheetMapDialog bottomSheetMapDialog= new BottomSheetMapDialog(getFragmentManager());
-                bottomSheetMapDialog.setCancelable(false);
+                BottomSheetMapDialog bottomSheetMapDialog= new BottomSheetMapDialog(getFragmentManager(),tvPlace);
                 bottomSheetMapDialog.show(getFragmentManager(), "a");
             }
         });
