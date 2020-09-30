@@ -46,9 +46,13 @@ dependencies {
     //MultiDex
     implementation 'com.android.support:multidex:1.0.3'
     //Firebase Firestore
-    implementation 'com.google.firebase:firebase-firestore:21.6.0'
+    implementation 'com.google.firebase:firebase-firestore:21.7.0'
     //Firebase Auth
     implementation 'com.google.firebase:firebase-auth:19.4.0'
+    //Firebase Storage
+    //Firebase Storage
+    implementation 'com.google.firebase:firebase-storage:19.2.0'
+    implementation 'com.google.firebase:firebase-core:17.5.0'
     //Custom FAB
     implementation 'com.github.clans:fab:1.6.4'
     //Glide
@@ -71,6 +75,11 @@ dependencies {
     implementation 'com.google.auto.value:auto-value-annotations:1.6.2'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.libraries.places:places:2.4.0'
-
+    //ViewAnimations
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
+    //Spinkit
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    //NumberProgressBar
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 
 }

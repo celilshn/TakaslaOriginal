@@ -23,7 +23,7 @@
             android:weightSum="9">
 
             <ImageView
-                android:id="@+id/details_top_bar_back_button"
+                android:id="@+id/details_bottom_sheet_top_bar_back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

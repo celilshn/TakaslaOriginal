@@ -4,48 +4,30 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.cengcelil.takaslaoriginal.R;
-import com.google.android.gms.common.api.Status;
-import com.google.android.libraries.maps.CameraUpdateFactory;
 import com.google.android.libraries.maps.GoogleMap;
 import com.google.android.libraries.maps.MapView;
 import com.google.android.libraries.maps.OnMapReadyCallback;
 import com.google.android.libraries.maps.model.LatLng;
-import com.google.android.libraries.maps.model.MarkerOptions;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.button.MaterialButton;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -57,10 +39,12 @@ public class BottomSheetMapDialog extends BottomSheetDialogFragment implements O
     private GoogleMap googleMap;
     private MaterialButton btConfirmLocation;
     private TextView tvLocation;
+    private ImageView iconLocation;
 
-    public BottomSheetMapDialog(FragmentManager fragmentManager, TextView textView) {
+    public BottomSheetMapDialog(FragmentManager fragmentManager, TextView textView, ImageView imageView) {
         this.fragmentManager = fragmentManager;
         this.tvLocation = textView;
+        this.iconLocation = imageView;
     }
 
     @Override
@@ -110,12 +94,26 @@ public class BottomSheetMapDialog extends BottomSheetDialogFragment implements O
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         btConfirmLocation = view.findViewById(R.id.btConfirmLocation);
+        ImageView xButton = view.findViewById(R.id.details_bottom_sheet_top_bar_back_button);
+        xButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
         btConfirmLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LatLng midLatLng = googleMap.getCameraPosition().target;
                 Log.d(TAG, "onCameraIdle: " + midLatLng.latitude + " " + midLatLng.longitude);
-                tvLocation.setText(getCompleteAddressString(midLatLng.latitude, midLatLng.longitude));
+                String locationStr = getCompleteAddressString(midLatLng.latitude, midLatLng.longitude);
+                if (!locationStr.isEmpty()) {
+                    tvLocation.setText(locationStr);
+                    iconLocation.setVisibility(View.GONE);
+                } else {
+                    tvLocation.setText(getString(R.string.choose_a_location));
+                    iconLocation.setVisibility(View.VISIBLE);
+                }
                 dismiss();
             }
         });

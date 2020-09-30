@@ -53,6 +53,12 @@
     <string name="pricable">Fiyatlanabilir</string>
     <string name="place_of_product">Konum</string>
     <string name="confirm_location">Konumu Onayla</string>
+    <string name="choose_a_location">Konum Seç</string>
+    <string name="description_of_product">Ürün Açıklaması</string>
+    <string name="confirm_product">İlanı Yayınla</string>
+    <string name="product_published">İlan Yayınlandı</string>
+    <string name="exit">Kapat</string>
+    <string name="published_fragment">Published Fragment</string>
     <plurals name="activity_gallery_count_selection">
         <item quantity="one">%d seçildi</item>
         <item quantity="other">%d seçildi</item>
