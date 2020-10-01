@@ -4,10 +4,14 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.firestore.DocumentId;
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class Product implements Parcelable, Serializable {
+public class Product{
     private String status;
     private String title;
     private String description;
@@ -16,28 +20,35 @@ public class Product implements Parcelable, Serializable {
     private String address;
     private String uid;
     private CategoryItem category;
-    protected Product(Parcel in) {
-        status = in.readString();
-        title = in.readString();
-        description = in.readString();
-        isPriceable = in.readByte() != 0;
-        price = in.readInt();
-        address = in.readString();
-        uid = in.readString();
-        category = in.readParcelable(CategoryItem.class.getClassLoader());
+    @ServerTimestamp
+    Date addedTime;
+    private String documentId;
+
+    public ArrayList<String> getIsLikedFrom() {
+        return isLikedFrom;
     }
 
-    public static final Creator<Product> CREATOR = new Creator<Product>() {
-        @Override
-        public Product createFromParcel(Parcel in) {
-            return new Product(in);
-        }
+    public void setIsLikedFrom(ArrayList<String> isLikedFrom) {
+        this.isLikedFrom = isLikedFrom;
+    }
 
-        @Override
-        public Product[] newArray(int size) {
-            return new Product[size];
-        }
-    };
+    private ArrayList<String> isLikedFrom;
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
+
+    public Date getAddedTime() {
+        return addedTime;
+    }
+
+    public void setAddedTime(Date addedTime) {
+        this.addedTime = addedTime;
+    }
 
     public String getUid() {
         return uid;
@@ -48,6 +59,7 @@ public class Product implements Parcelable, Serializable {
     }
 
     public Product() {
+        isLikedFrom = new ArrayList<>();
     }
 
 
@@ -110,34 +122,4 @@ public class Product implements Parcelable, Serializable {
 
 
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(status);
-        parcel.writeString(title);
-        parcel.writeString(description);
-        parcel.writeByte((byte) (isPriceable ? 1 : 0));
-        parcel.writeInt(price);
-        parcel.writeString(address);
-        parcel.writeString(uid);
-        parcel.writeParcelable(category, i);
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "status='" + status + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", isPriceable=" + isPriceable +
-                ", price=" + price +
-                ", address='" + address + '\'' +
-                ", uid='" + uid + '\'' +
-                ", category=" + category +
-                '}';
-    }
 }

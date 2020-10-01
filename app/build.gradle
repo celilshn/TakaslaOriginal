@@ -81,5 +81,8 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     //NumberProgressBar
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
-
+    //Like-Button
+    implementation 'com.sackcentury:shinebutton:1.0.0'
+    //KEYBOARD
+    implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
 }

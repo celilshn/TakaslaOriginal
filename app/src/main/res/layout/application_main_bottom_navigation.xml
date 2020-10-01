@@ -12,7 +12,7 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/fab_background"
         app:fab_colorNormal="@android:color/transparent"
-        app:fab_colorPressed="#E75043"
+        app:fab_colorPressed="@color/colorDarkYellow"
         app:fab_colorRipple="#99FFFFFF"
         app:fab_hideAnimation="@anim/fab_scale_down"
         app:fab_label=""
@@ -28,8 +28,9 @@
         app:itemRippleColor="@android:color/black"
         android:layout_below="@id/fab"
         android:layout_marginTop="-26dp"
+        android:elevation="3dp"
         app:itemIconSize="30dp"
-        app:itemIconTint="@color/application_main_bottom_navigation_item_color"
+        app:itemIconTint="@color/application_main_bottom_navigation_item_color_selector"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/navigation" />
 

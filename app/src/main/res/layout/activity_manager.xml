@@ -10,10 +10,6 @@
     android:focusableInTouchMode="true"
     tools:context="com.cengcelil.takaslaoriginal.Manager.ManagerActivity">
 
-    <include
-        android:id="@+id/include"
-        app:layout_constraintTop_toTopOf="parent"
-        layout="@layout/application_main_topbar" />
     <FrameLayout
         android:id="@+id/manager_container"
         android:layout_width="match_parent"
@@ -21,7 +17,7 @@
         android:background="@color/colorGray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
         android:id="@+id/include2"

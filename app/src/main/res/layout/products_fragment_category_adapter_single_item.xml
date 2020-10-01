@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="60dp"
+    android:layout_height="90dp"
+    android:id="@+id/itemMainLayout">
+
+    <ImageView
+        android:id="@+id/itemImageview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/home_png" />
+
+    <TextView
+        android:id="@+id/itemTextview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Ev Eşyaları"
+        android:layout_below="@id/itemImageview"
+        android:textSize="10sp"
+        android:layout_marginTop="3dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorDarkGray"/>
+
+
+
+</RelativeLayout>

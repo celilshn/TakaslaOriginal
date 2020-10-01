@@ -35,7 +35,9 @@
             android:windowSoftInputMode="adjustPan">
 
         </activity>
-        <activity android:name=".Manager.ManagerActivity" />
+        <activity android:name=".Manager.ManagerActivity"
+            android:windowSoftInputMode="adjustResize"
+            />
         <activity
             android:name=".Authenticate.WelcomeActivity"
             android:windowSoftInputMode="adjustPan">

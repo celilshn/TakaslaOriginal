@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemMainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="220dp">
+
+    <ImageView
+        android:id="@+id/itemImageview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="fitXY" />
+
+    <com.sackcentury.shinebuttonlib.ShineButton
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:id="@+id/shine"
+        android:visibility="gone"
+        android:src="@color/colorSoftGray"
+        app:btn_color="@color/colorSoftGray"
+        app:btn_fill_color="@android:color/holo_red_dark"
+        app:big_shine_color="@color/colorSoftGray"
+        app:small_shine_color="@color/colorSoftGray"
+        app:allow_random_color="false"
+        app:siShape="@raw/heart"/>
+    <TextView
+        android:id="@+id/likesCount"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_alignTop="@id/shine"
+        android:layout_alignBottom="@id/shine"
+        android:layout_marginEnd="10dp"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

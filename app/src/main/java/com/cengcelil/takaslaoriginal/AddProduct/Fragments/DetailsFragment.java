@@ -66,7 +66,7 @@ public class DetailsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         imagesUriList = new ArrayList<>();
-        productsCollectionReferenece = FirebaseFirestore.getInstance().collection("Products");
+        productsCollectionReferenece = FirebaseFirestore.getInstance().collection(getString(R.string.collection_products));
         if (getArguments() != null) {
             capturedItems = getArguments().getParcelableArrayList("capturedItems");
             categoryItem = getArguments().getParcelable("categoryItem");

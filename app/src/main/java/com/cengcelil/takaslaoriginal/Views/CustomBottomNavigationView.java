@@ -13,8 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class CustomBottomNavigationView extends BottomNavigationView {
 
     private Path mPath;
-    private Paint mPaint;
-
+    private Paint mPaint,borderPaint;
     /** the CURVE_CIRCLE_RADIUS represent the radius of the fab button */
     private final int CURVE_CIRCLE_RADIUS = 130/2;
     // the coordinates of the first curve
@@ -50,8 +49,14 @@ public class CustomBottomNavigationView extends BottomNavigationView {
     private void init() {
         mPath = new Path();
         mPaint = new Paint();
-        mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        borderPaint = new Paint();
+
+        // Important for certain APIs
+        mPaint.setStyle(Paint.Style.FILL);
         mPaint.setColor(ContextCompat.getColor(getContext(), R.color.white));
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setColor(ContextCompat.getColor(getContext(), R.color.colorPrimary));
+
         setBackgroundColor(Color.TRANSPARENT);
     }
 
@@ -106,5 +111,7 @@ public class CustomBottomNavigationView extends BottomNavigationView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawPath(mPath, mPaint);
+        canvas.drawPath(mPath, borderPaint);
+
     }
 }

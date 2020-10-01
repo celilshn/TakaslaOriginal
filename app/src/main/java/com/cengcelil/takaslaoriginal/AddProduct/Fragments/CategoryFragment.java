@@ -18,6 +18,7 @@ import com.cengcelil.takaslaoriginal.Adapters.CategoryAdapter;
 import com.cengcelil.takaslaoriginal.Models.CapturedItem;
 import com.cengcelil.takaslaoriginal.Models.CategoryItem;
 import com.cengcelil.takaslaoriginal.R;
+import com.cengcelil.takaslaoriginal.Utils;
 
 import java.util.ArrayList;
 
@@ -54,17 +55,7 @@ public class CategoryFragment extends Fragment {
         backButton = view.findViewById(R.id.category_top_bar_back_button);
         categoryRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
 
-        categoryItems = new ArrayList<>();
-        categoryItems.add(new CategoryItem(R.drawable.tv_png, "Elektronik"));
-        categoryItems.add(new CategoryItem(R.drawable.home_stuff_png, "Ev Eşyaları"));
-        categoryItems.add(new CategoryItem(R.drawable.toy_png, "Oyuncak Dünyası"));
-        categoryItems.add(new CategoryItem(R.drawable.car_spare_part_png, "Oto Yedek Parça"));
-        categoryItems.add(new CategoryItem(R.drawable.book_magasine_png, "Kitap ve Dergi"));
-        categoryItems.add(new CategoryItem(R.drawable.garden_hobby_png, "Bahçe ve Hobi"));
-        categoryItems.add(new CategoryItem(R.drawable.sport_png, "Spor Ekipmanları"));
-        categoryItems.add(new CategoryItem(R.drawable.antique_png, "Antika"));
-        categoryItems.add(new CategoryItem(R.drawable.office_stuff_png, "Ofis Malzemeleri"));
-        categoryItems.add(new CategoryItem(R.drawable.music_png, "Müzik Aletleri"));
+        categoryItems = Utils.getCategoriesHorizontal(getActivity());
 
         categoryAdapter = new CategoryAdapter(categoryItems) {
             @Override

@@ -27,6 +27,8 @@ import com.cengcelil.takaslaoriginal.Views.CustomBottomNavigationView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 
 public class ManagerActivity extends AppCompatActivity {
@@ -45,6 +47,7 @@ public class ManagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
         navigationView = findViewById(R.id.customBottomBar);
+        loadFragment(new ProductsFragment(),getString(R.string.products_fragment));
         itemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -74,15 +77,31 @@ public class ManagerActivity extends AppCompatActivity {
         navigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
         navigationView.getOrCreateBadge(R.id.navigation_home).setNumber(2);
         userInformation = ((UserClient) getApplicationContext()).getUserInformation();
-
-        findViewById(R.id.btTopbarSettings).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
-                bottomSheetDialog.show(getSupportFragmentManager(), "s");
-            }
-        });
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        Log.d(TAG,"onVisibilityChanged: Keyboard visibility changed");
+                        if(isOpen){
+                            Log.d(TAG, "onVisibilityChanged: Keyboard is open");
+                            findViewById(R.id.include2).setVisibility(View.INVISIBLE);
+                            Log.d(TAG, "onVisibilityChanged: NavBar got Invisible");
+                        }else{
+                            Log.d(TAG, "onVisibilityChanged: Keyboard is closed");
+                            findViewById(R.id.include2).setVisibility(View.VISIBLE);
+                            Log.d(TAG, "onVisibilityChanged: NavBar got Visible");
+                        }
+                    }
+                });
+//        findViewById(R.id.btTopbarSettings).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog();
+//                bottomSheetDialog.show(getSupportFragmentManager(), "s");
+//            }
+//        });
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
