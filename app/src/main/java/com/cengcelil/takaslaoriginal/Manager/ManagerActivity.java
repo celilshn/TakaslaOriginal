@@ -1,13 +1,10 @@
 package com.cengcelil.takaslaoriginal.Manager;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +16,6 @@ import com.cengcelil.takaslaoriginal.Manager.Fragments.MessagesFragment;
 import com.cengcelil.takaslaoriginal.Manager.Fragments.ProductsFragment;
 import com.cengcelil.takaslaoriginal.Manager.Fragments.ProfileFragment;
 import com.cengcelil.takaslaoriginal.Manager.Fragments.SearchFragment;
-import com.cengcelil.takaslaoriginal.Models.BottomSheetDialog;
 import com.cengcelil.takaslaoriginal.Models.UserClient;
 import com.cengcelil.takaslaoriginal.Models.UserInformation;
 import com.cengcelil.takaslaoriginal.R;

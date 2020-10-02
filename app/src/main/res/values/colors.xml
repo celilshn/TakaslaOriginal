@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#000000</color>
     <color name="colorPrimary50">#80000000</color>
+    <color name="colorPrimary20">#33000000</color>
     <color name="colorSoftPrimary">#4D000000</color>
     <color name="colorAccent">#EE5164</color>
     <color name="colorEdittextHint">#80EE5164</color>
@@ -10,6 +11,7 @@
     <color name="colorDarkGray">#707070</color>
     <color name="colorDarkYellow">#FCB501</color>
     <color name="colorfacebooktone">#367FC0</color>
+    <color name="colortabbackground">#80E4E4E4</color>
     <color name="white">#FFFFFF</color>
     <color name="colorSoftWhite">#80FFFFFF</color>
     <color name="application_main_bottom_navigation_icon_tint_color">#8890A6</color>

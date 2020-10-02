@@ -24,6 +24,15 @@ public class Product{
     Date addedTime;
     private String documentId;
 
+    public String getActivityStatus() {
+        return activityStatus;
+    }
+
+    public void setActivityStatus(String activityStatus) {
+        this.activityStatus = activityStatus;
+    }
+
+    private String activityStatus = "active";
     public ArrayList<String> getIsLikedFrom() {
         return isLikedFrom;
     }

@@ -32,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import static com.cengcelil.takaslaoriginal.Utils.ACTIVE;
 import static com.cengcelil.takaslaoriginal.Utils.FIREBASE_FIRESTORE;
 
 public class ProductsFragment extends Fragment {
@@ -53,6 +54,8 @@ public class ProductsFragment extends Fragment {
         FIREBASE_FIRESTORE.collection(getString(R.string.collection_products))
                 .orderBy("addedTime", Query.Direction.DESCENDING)
                 .limit(10)
+                .whereEqualTo("activityStatus",Utils.ACTIVE)
+
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {

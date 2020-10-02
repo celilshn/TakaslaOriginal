@@ -3,7 +3,6 @@ package com.cengcelil.takaslaoriginal;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
@@ -26,7 +25,9 @@ public class Utils {
 
     public static final StorageReference STORAGE_REFERENCE = FirebaseStorage.getInstance().getReference();
     public static final FirebaseFirestore FIREBASE_FIRESTORE = FirebaseFirestore.getInstance();
-
+    public static final String ACTIVE = "active";
+    public static final String TIMEOUT = "timeout";
+    public static final String SOLD = "sold";
     public static void uiOn(ProgressBar progressBar, View view) {
         progressBar.setVisibility(View.GONE);
         view.setClickable(true);
@@ -64,19 +65,19 @@ public class Utils {
                 .orderBy("addedTime", Query.Direction.DESCENDING)
                 .limit(10)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (value != null)
-                    for (QueryDocumentSnapshot queryDocumentSnapshot : value) {
-                        Product product = queryDocumentSnapshot.toObject(Product.class);
-                        product.setDocumentId(queryDocumentSnapshot.getId());
-                        products.add(product);
-                        Log.d(TAG, "onEvent: "+product.getTitle());
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (value != null)
+                            for (QueryDocumentSnapshot queryDocumentSnapshot : value) {
+                                Product product = queryDocumentSnapshot.toObject(Product.class);
+                                product.setDocumentId(queryDocumentSnapshot.getId());
+                                products.add(product);
+                                Log.d(TAG, "onEvent: " + product.getTitle());
+                            }
+                        else
+                            Log.d(TAG, "onEvent: " + error.getMessage());
                     }
-                else
-                    Log.d(TAG, "onEvent: " + error.getMessage());
-            }
-        });
+                });
         return products;
     }
 }

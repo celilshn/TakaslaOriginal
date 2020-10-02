@@ -31,13 +31,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Manager.Profile.MyProductsActivity"
+            android:label="@string/title_activity_my_products"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".AddProduct.AddProductActivity"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
-        <activity android:name=".Manager.ManagerActivity"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".Manager.ManagerActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Authenticate.WelcomeActivity"
             android:windowSoftInputMode="adjustPan">
@@ -63,7 +65,6 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
     </application>
 
 </manifest>

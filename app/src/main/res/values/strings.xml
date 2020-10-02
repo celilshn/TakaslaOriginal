@@ -75,9 +75,32 @@
     <string name="sport_stuff_text">Spor Ekipmanları</string>
     <string name="other_text">Diğer</string>
     <string name="collection_products">Products</string>
+    <string name="my_products">İlanlarım</string>
+    <string name="settings">Ayarlar</string>
+    <string name="invite_friend">Arkadaşını Davet Et</string>
+    <string name="proteciton_of_data_personal">Kişisel Verilerin Korunması</string>
+    <string name="dependency">Şartlar Ve Koşullar</string>
+    <string name="privacy">Gizlilik Politikası</string>
+    <string name="logout">Çıkış Yap</string>
+    <string name="settings_fragment">Settings Fragment</string>
+    <string name="save">Kaydet</string>
+    <string name="name_surname_caps_false">İsim Soyisim</string>
+    <string name="email_caps_false">E-Posta</string>
     <plurals name="activity_gallery_count_selection">
         <item quantity="one">%d seçildi</item>
         <item quantity="other">%d seçildi</item>
     </plurals>
+    <string name="title_activity_my_products">MyProductsActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="active_products">Aktif İlan</string>
+    <string name="timout_products">Süresi Dolan</string>
+    <string name="sold_products">Satıldı</string>
+    <string name="liked_products">Favorilerim</string>
+    <string name="none_active_product">Satışta Olan İlanınız Bulunmuyor</string>
+    <string name="take_a_product">İlan Ver</string>
+    <string name="none_timeout_product">Süresi Dolan İlanınız Bulunmuyor</string>
+    <string name="none_sold_product">Henüz Satılan İlanınız Bulunmuyor</string>
+    <string name="none_liked_product">Henüz Favori İlanınız Bulunmuyor</string>
 
 </resources>
