@@ -19,19 +19,22 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.andremion.louvre.Louvre;
-import com.andremion.louvre.home.GalleryActivity;
 import com.camerakit.CameraKit;
 import com.camerakit.CameraKitView;
 import com.cengcelil.takaslaoriginal.Adapters.CapturedAdapter;
 import com.cengcelil.takaslaoriginal.Models.CapturedItem;
 import com.cengcelil.takaslaoriginal.R;
 import com.google.android.material.snackbar.Snackbar;
+import com.gt.photopicker.PhotoPickerActivity;
+import com.gt.photopicker.SelectModel;
+import com.gt.photopicker.intent.PhotoPickerIntent;
+
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -105,12 +108,11 @@ public class CaptureFragment extends Fragment {
                 if (capturedAdapter.getItemCount() == maxImagesCount) {
                     Snackbar.make(getActivity().findViewById(android.R.id.content), getString(R.string.activity_gallery_max_selection_reached), Snackbar.LENGTH_SHORT).show();
                 } else {
-                    Louvre louvre = Louvre.init(CaptureFragment.this)
-                            .setRequestCode(LOUVRE_REQUEST_CODE);
-                    louvre.setMaxSelection(maxImagesCount - capturedAdapter.getItemCount());
-
-                    louvre.setMediaTypeFilter(Louvre.IMAGE_TYPE_JPEG, Louvre.IMAGE_TYPE_PNG);
-                    louvre.open();
+                    PhotoPickerIntent intent = new PhotoPickerIntent(getActivity());
+                    intent.setSelectModel(SelectModel.MULTI);
+                    intent.setShowCarema(false);
+                    intent.setMaxTotal(maxImagesCount-capturedAdapter.getItemCount());
+                    startActivityForResult(intent, 999);
                 }
             }
         });
@@ -228,17 +230,27 @@ public class CaptureFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == LOUVRE_REQUEST_CODE && resultCode == RESULT_OK) {
-            for (Uri uri : GalleryActivity.getSelection(data)) {
-                CapturedItem item = new CapturedItem(new File(uri.getPath()));
-                item.setDragEnable(true);
-                item.setDropEnable(true);
-                capturedItems.add(0, item);
+        ArrayList<String> imgPaths = new ArrayList<>();
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 999:
+                    imgPaths = data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT);
+                    for (String str : imgPaths) {
+                        Log.e("imgPath", str);
+
+                        Log.d(TAG, "onActivityResult: " + str);
+                        Uri uri = Uri.parse(str);
+                        CapturedItem item = new CapturedItem(new File(uri.getPath()));
+                        item.setDragEnable(true);
+                        item.setDropEnable(true);
+                        capturedItems.add(0, item);
+
+                    }
+                    capturedAdapter.notifyDataSetChanged();
+                    break;
             }
-            capturedAdapter.notifyDataSetChanged();
-            Log.d(TAG, "onActivityResult: " + GalleryActivity.getSelection(data));
-            return;
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 }

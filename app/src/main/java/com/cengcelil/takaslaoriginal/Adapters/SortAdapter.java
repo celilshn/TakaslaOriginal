@@ -21,6 +21,7 @@ import java.util.Collections;
 
 import cn.cyan.dragrecyclerview.OnItemChangeListener;
 
+
 public class SortAdapter extends RecyclerView.Adapter<SortAdapter.MyHolder> implements OnItemChangeListener {
     public ArrayList<CapturedItem> getCapturedItems() {
         return capturedItems;

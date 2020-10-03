@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Product{
+public class Product implements Parcelable{
     private String status;
     private String title;
     private String description;
@@ -20,6 +20,43 @@ public class Product{
     private String address;
     private String uid;
     private CategoryItem category;
+    private String uri;
+
+    protected Product(Parcel in) {
+        status = in.readString();
+        title = in.readString();
+        description = in.readString();
+        isPriceable = in.readByte() != 0;
+        price = in.readInt();
+        address = in.readString();
+        uid = in.readString();
+        category = in.readParcelable(CategoryItem.class.getClassLoader());
+        uri = in.readString();
+        documentId = in.readString();
+        activityStatus = in.readString();
+        isLikedFrom = in.createStringArrayList();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     @ServerTimestamp
     Date addedTime;
     private String documentId;
@@ -130,5 +167,24 @@ public class Product{
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(status);
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeByte((byte) (isPriceable ? 1 : 0));
+        parcel.writeInt(price);
+        parcel.writeString(address);
+        parcel.writeString(uid);
+        parcel.writeParcelable(category, i);
+        parcel.writeString(uri);
+        parcel.writeString(documentId);
+        parcel.writeString(activityStatus);
+        parcel.writeStringList(isLikedFrom);
+    }
 }

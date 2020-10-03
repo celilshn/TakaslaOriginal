@@ -49,18 +49,23 @@ public class ProductsFragment extends Fragment {
         categoryItems = Utils.getCategoriesHorizontal(getContext());
         productsFragmentCategoryAdapter = new ProductsFragmentCategoryAdapter(categoryItems);
         products = new ArrayList<>();
-        productsFragmentProductAdapter = new ProductsFragmentProductAdapter(getContext(),products);
+        productsFragmentProductAdapter = new ProductsFragmentProductAdapter(getContext(),products){
+            @Override
+            public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+            }
+        };
 
         FIREBASE_FIRESTORE.collection(getString(R.string.collection_products))
+                .whereEqualTo("activityStatus",Utils.ACTIVE)
                 .orderBy("addedTime", Query.Direction.DESCENDING)
                 .limit(10)
-                .whereEqualTo("activityStatus",Utils.ACTIVE)
 
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null) {
-                            Log.w(TAG, "listen:error", error);
+                            Log.w(TAG, "listen:error"+error.getLocalizedMessage());
                             return;
                         }
 

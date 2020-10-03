@@ -2,6 +2,7 @@ package com.cengcelil.takaslaoriginal.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.cengcelil.takaslaoriginal.Manager.Products.ProductPreviewActivity;
 import com.cengcelil.takaslaoriginal.Models.Product;
 import com.cengcelil.takaslaoriginal.R;
 import com.cengcelil.takaslaoriginal.Utils;
@@ -65,6 +67,15 @@ public class ProductsFragmentProductAdapter extends RecyclerView.Adapter<Product
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Product product = products.get(position);
+                Intent intent = new Intent(context, ProductPreviewActivity.class);
+                intent.putExtra("product",product);
+                context.startActivity(intent);
+            }
+        });
         if (products.get(position).getIsLikedFrom().size() != 0) {
             holder.likesCount.setText(String.valueOf(products.get(position).getIsLikedFrom().size()));
 
@@ -117,6 +128,7 @@ public class ProductsFragmentProductAdapter extends RecyclerView.Adapter<Product
         Utils.STORAGE_REFERENCE.child(products.get(position).getDocumentId() + "/" + 0).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+                products.get(position).setUri(String.valueOf(uri));
                 Glide.with(context)
                         .load(String.valueOf(uri)).listener(new RequestListener<Drawable>() {
                     @Override

@@ -30,13 +30,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Manager.Products.ProductPreviewActivity"></activity>
+        <activity
+            android:name=".Manager.Profile.EditMyProductActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Manager.Profile.MyProductsActivity"
             android:label="@string/title_activity_my_products"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddProduct.AddProductActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Manager.ManagerActivity"
             android:windowSoftInputMode="adjustResize" />
@@ -49,12 +53,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.andremion.louvre.home.GalleryActivity"
-            android:theme="@style/AppTheme.Louvre.Light" />
-        <activity
-            android:name="com.andremion.louvre.preview.PreviewActivity"
-            android:theme="@style/AppTheme.Louvre.Preview" />
+
 
         <meta-data
             android:name="preloaded_fonts"

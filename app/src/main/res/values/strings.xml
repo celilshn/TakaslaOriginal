@@ -102,5 +102,29 @@
     <string name="none_timeout_product">Süresi Dolan İlanınız Bulunmuyor</string>
     <string name="none_sold_product">Henüz Satılan İlanınız Bulunmuyor</string>
     <string name="none_liked_product">Henüz Favori İlanınız Bulunmuyor</string>
+    <string name="update_product">İlanı Güncelle</string>
+    <string name="sold_product">İlan Satıldı</string>
+    <string name="delete_product">İlanı Sil</string>
+    <string name="category_of_product">Kategori</string>
+    <string name="yes">Evet</string>
+    <string name="no">Hayır</string>
+    <string name="dialog_delete_text">"İlanı Silmek İstediğine Emin Misin ? "</string>
+    <string name="dialog_update_text">İlanı Güncellemek İstediğinize Emin Misiniz ?</string>
+    <string name="dialog_sold_text">"İlanı Satıldı Olarak İşaretlemek İstiyor Musunuz ? "</string>
+
+    <string name="image">Fotoğraf</string>
+    <string name="all_image">Tüm Fotoğraflar</string>
+    <string name="preview">Önizle</string>
+    <string name="msg_no_camera">无法启用系统相机</string>
+    <string name="msg_amount_limit">Ekleyebileceğin Fotoğraf Sınırını Aştın</string>
+    <string name="done">Tamamlandı</string>
+    <string name="done_with_count">Tamamlandı(%1$d/%2$d)</string>
+    <string name="image_index">%1$d/%2$d</string>
+    <string name="delete">Sil</string>
+    <string name="edit">Düzenle</string>
+    <string name="deleted_a_photo">Bir fotoğrafı sildin</string>
+    <string name="confirm_to_delete">Silmeyi Onayla？</string>
+    <string name="cancel">İptal</string>
+    <string name="undo">Geri Al</string>
 
 </resources>

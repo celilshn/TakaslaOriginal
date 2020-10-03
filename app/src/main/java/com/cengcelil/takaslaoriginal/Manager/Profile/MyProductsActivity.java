@@ -1,6 +1,8 @@
 package com.cengcelil.takaslaoriginal.Manager.Profile;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.cengcelil.takaslaoriginal.Adapters.MyProductsViewPagerAdapter;
 import com.cengcelil.takaslaoriginal.R;
@@ -22,6 +24,13 @@ public class MyProductsActivity extends AppCompatActivity {
         viewPager.setAdapter(myProductsViewPagerAdapter);
         TabLayout tabs = findViewById(R.id.tablayout);
         tabs.setupWithViewPager(viewPager);
+        ImageView btBack = findViewById(R.id.myproducts_top_bar_back_button);
+        btBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 }
