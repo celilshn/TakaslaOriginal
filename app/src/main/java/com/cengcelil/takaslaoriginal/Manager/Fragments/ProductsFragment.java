@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +36,8 @@ import java.util.ArrayList;
 
 import static com.cengcelil.takaslaoriginal.Utils.ACTIVE;
 import static com.cengcelil.takaslaoriginal.Utils.FIREBASE_FIRESTORE;
+import static com.cengcelil.takaslaoriginal.Utils.uiOff;
+import static com.cengcelil.takaslaoriginal.Utils.uiOn;
 
 public class ProductsFragment extends Fragment {
     private static final String TAG = "ProductsFragment";
@@ -42,6 +46,8 @@ public class ProductsFragment extends Fragment {
     private ProductsFragmentProductAdapter productsFragmentProductAdapter;
     private ArrayList<CategoryItem> categoryItems;
     ArrayList<Product> products;
+    private ProgressBar progressBar;
+    private RelativeLayout parentView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +92,7 @@ public class ProductsFragment extends Fragment {
                                     Log.d(TAG, "Removed city: " + dc.getDocument().getData());
                                     break;
                             }
+                            uiOn(progressBar,parentView);
                         }
                     }
                 });
@@ -105,6 +112,9 @@ public class ProductsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //SETTİNG VİEWS
+        parentView = view.findViewById(R.id.fragment_products_parent);
+        progressBar = view.findViewById(R.id.spin_kit);
+        uiOff(progressBar,parentView);
         rvCategory = view.findViewById(R.id.products_fragment_category_recyclerview);
         rvCategory.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false));
         rvCategory.addItemDecoration(new EqualSpaceItemDecoration(10));

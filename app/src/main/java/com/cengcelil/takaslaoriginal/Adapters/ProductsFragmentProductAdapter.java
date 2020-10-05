@@ -52,7 +52,7 @@ public class ProductsFragmentProductAdapter extends RecyclerView.Adapter<Product
 
         requestOptions = new RequestOptions()
                 .placeholder(circularProgressDrawable)
-                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
 
     }
 

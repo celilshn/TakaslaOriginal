@@ -93,4 +93,8 @@ dependencies {
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
     //Slider
     implementation 'com.github.smarteist:autoimageslider:1.3.9'
+    //Hide Heaader
+    implementation 'com.vcaen:androidautohideheader:1.2'
+    //Ratingbar
+    implementation 'com.github.FlyingPumba:SimpleRatingBar:v0.1.5'
 }

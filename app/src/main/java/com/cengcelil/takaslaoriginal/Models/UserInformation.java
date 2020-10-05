@@ -13,6 +13,23 @@ public class UserInformation {
     }
 
     private String name, email;
+    private float rate = 0;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public float getRate() {
+        return rate;
+    }
+
+    public void setRate(float rate) {
+        this.rate = rate;
+    }
 
     public Date getLastLogin() {
         return lastLogin;

@@ -15,6 +15,7 @@
     <color name="white">#FFFFFF</color>
     <color name="colorSoftWhite">#80FFFFFF</color>
     <color name="application_main_bottom_navigation_icon_tint_color">#8890A6</color>
+    <color name="product_preview_background_color">#338890A6</color>
     <color name="application_main_bottom_navigation_icon_tint_color_checked">#FE707A</color>
     <color name="menu_background">#FFFFFF</color>
     <color name="capture_topbar_text_color">#000000</color>

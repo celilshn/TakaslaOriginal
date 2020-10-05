@@ -1,5 +1,6 @@
 package com.cengcelil.takaslaoriginal.Manager.Profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +45,21 @@ public class ActiveProductFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate: ");
         products = new ArrayList<>();
-        productsFragmentProductAdapter = new ProductsFragmentProductAdapter(getContext(), products);
+        productsFragmentProductAdapter = new ProductsFragmentProductAdapter(getContext(), products) {
+            @Override
+            public void onBindViewHolder(@NonNull MyHolder holder, final int position) {
+                super.onBindViewHolder(holder, position);
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        Intent intent = new Intent(getActivity(), EditMyProductActivity.class);
+                        intent.putExtra("product", products.get(position));
+                        startActivity(intent);
+                    }
+                });
+            }
+        };
         FIREBASE_FIRESTORE.collection(getString(R.string.collection_products))
                 .orderBy("addedTime", Query.Direction.DESCENDING)
                 .whereEqualTo("activityStatus", Utils.ACTIVE)
@@ -60,19 +75,30 @@ public class ActiveProductFragment extends Fragment {
                         if (value != null) {
                             if (value.getDocumentChanges().size() != 0) {
                                 for (DocumentChange dc : value.getDocumentChanges()) {
+                                    Product product = dc.getDocument().toObject(Product.class);
+                                    product.setDocumentId(dc.getDocument().getId());
+
                                     switch (dc.getType()) {
+
                                         case ADDED:
                                             Log.d(TAG, "New Product: " + dc.getDocument().getData());
-                                            Product product = dc.getDocument().toObject(Product.class);
-                                            product.setDocumentId(dc.getDocument().getId());
                                             products.add(product);
                                             productsFragmentProductAdapter.notifyDataSetChanged();
                                             Log.d(TAG, "onEvent: " + product.getTitle());
                                             break;
                                         case MODIFIED:
+                                            for (Product prd : products)
+                                                if (prd.getDocumentId().matches(product.getDocumentId())) {
+                                                    Log.d(TAG, "onEvent: "+prd.getDocumentId()+ " "+ product.getDocumentId());
+                                                    products.set(products.indexOf(prd), product);
+                                                    break;
+                                                }
+                                            productsFragmentProductAdapter.notifyDataSetChanged();
                                             Log.d(TAG, "Modified Product: " + dc.getDocument().getData());
                                             break;
                                         case REMOVED:
+                                            products.remove(product);
+                                            productsFragmentProductAdapter.notifyDataSetChanged();
                                             Log.d(TAG, "Removed city: " + dc.getDocument().getData());
                                             break;
                                     }

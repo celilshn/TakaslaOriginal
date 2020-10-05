@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.cengcelil.takaslaoriginal.R;
 import com.google.firebase.storage.StorageReference;
@@ -52,7 +53,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.MyHolder> {
         StorageReference storageReference = storageReferences.get(position);
         Glide.with(viewHolder.itemView)
                 .load(storageReference)
-                .apply(new RequestOptions())
+                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
                 .into(viewHolder.imageView);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

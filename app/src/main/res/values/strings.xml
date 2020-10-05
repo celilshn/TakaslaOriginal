@@ -126,5 +126,12 @@
     <string name="confirm_to_delete">Silmeyi Onayla？</string>
     <string name="cancel">İptal</string>
     <string name="undo">Geri Al</string>
+    <string name="follow">Takip Et</string>
+    <string name="report_user">Kullanıcıyı Şikayet Et</string>
+    <string name="send">Gönder</string>
+    <string name="para_birimi">TL</string>
+    <string name="hello">Merhaba</string>
+    <string name="wantToExchange">Takas Yapmak İstiyorum !</string>
+    <string name="isExist">Ürün Mevcut Mudur ?</string>
 
 </resources>
